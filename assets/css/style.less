@@ -1,0 +1,262 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?1ftc0o');
+  src:  url('fonts/icomoon.eot?1ftc0o#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?1ftc0o') format('truetype'),
+    url('fonts/icomoon.woff?1ftc0o') format('woff'),
+    url('fonts/icomoon.svg?1ftc0o#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* css */
+* { margin: 0; padding: 0 }
+body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #333; 
+  background: #E9EAED;
+  // background: #eaf1fe;
+   line-height: 1.5; overflow-x: hidden; }
+img { border: 0; display: block }
+ul, li { list-style: none; }
+a { text-decoration: none; color: #333; }
+a:hover { color: #000; text-decoration: none; }
+.clear { clear: both; width: 100%; overflow: hidden; height: 20px }
+.clearblank { clear: both; width: 100%; overflow: hidden; }
+.fl { float: left!important; }
+.fr { float: right!important; }
+.box, article { width: 1200px; margin: auto; overflow: hidden }
+.navbox { width: 1200px; margin: auto; }
+.mt20 { margin-top: 20px; }
+.blue { color: #00C1DE }
+.ad img { width: 100% }
+
+.lbox {
+  width: 75%;
+  float: left;
+  overflow: hidden;
+}
+.rbox { width: 23.5%; float: right; overflow: hidden; }
+.whitebg { background: #fff; border-radius: 3px; padding: 20px; margin-bottom: 20px; overflow: hidden; }
+
+
+/* htitle */
+.htitle { font-size: 16px; line-height: 40px; border-bottom: 1px solid #eee; color: #484848; font-weight: normal; position: relative; margin-bottom: 10px; }
+.htitle:after { content: ""; position: absolute; width: 60px; height: 2px; content: ""; background: #000; left: 0; bottom: 0; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; transition: all .5s ease; }
+.htitle:hover:after { width: 80px; }
+
+/*topnews*/
+.topnews { display: block; margin: 20px 0; background: #000; position: relative; overflow: hidden; border-radius: 3px; max-height: 110px; }
+.topnews img { opacity: .7; }
+.topnews span { bottom: 0; position: absolute; bottom: 30%; left: 0; right: 0; color: #FFF; text-align: center; font-size: 15px; padding: 0 40px; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 2; line-height: 22px; }
+.topnews:hover img { opacity: .9; transform: scale(1.1); }
+
+// lanmu
+.lanmu img { height: 100px; float: left; margin-right: 20px }
+.lanmu h1 { font-size: 22px; margin-bottom: 15px }
+.lanmu p { color: #666 }
+
+// bloglist
+.bloglist {
+  >ul {
+    padding: 10px 0 0;
+    >li { overflow: hidden; margin-bottom: 20px; border-bottom: #eee 1px dashed; padding-bottom: 20px; position: relative; min-height: 120px; 
+      .blogtitle{
+        transition: all ease .5s;
+      }
+    }
+    >li:hover {
+      color: #337ab7;
+      .blogtitle{
+        transform: translateX(10px);
+        a {
+          color: #337ab7;
+        }
+      }
+    }
+  }
+}
+a.viewmore { display: block; right: 10px; bottom: 20px; position: absolute; padding: 3px 10px; background: #12b7de; color: #fff; border-radius: 3px; }
+.blogpic {
+  float: left; width: 23.2%; margin-right: 20px; display: block; overflow: hidden; border-radius: 3px; position: relative;
+  i {
+    display: block; position: absolute; top: 0; left: 0; z-index: 9; font-style: normal; padding: 3px 5px; background: rgba(18,182,221,.8); font-size: 14px;
+    a { color: #FFF }
+  }
+}
+.blogtitle {
+  margin: 0 0 10px 0; font-size: 18px; overflow: hidden;
+  b { color: #F00; }
+}
+.blogtext { font-size: 14px; color: #666; overflow: hidden; text-overflow: ellipsis; -webkit-box-orient: vertical; display: -webkit-box; -webkit-line-clamp: 3; margin-left: 20px }
+.bloginfo {
+  margin-top: 20px; overflow: hidden; color: #999; line-height: 34px;
+  span {
+    margin: 0 5px;
+    a { color: #096 }
+  }
+}
+.avatar {
+  position: relative; float: left; width: 30px; height: 30px; border-radius: 100%; padding: 2px; display: block; background: linear-gradient(to top right, rgba(0,153,255,.9), rgba(42,228,197,.7));
+  img { width: 100%; border-radius: 50%; }
+}
+.avatar::after { content: ""; position: absolute; background: url('../img/v.png') no-repeat; background-size: 12px; width: 12px; height: 12px; right: 0; bottom: 0 }
+.imgscale img { width: 100%; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; -ms-transition: all .5s ease; -o-transition: all .5s ease; transition: all .5s ease; transition: all 0.5s; }
+.imgscale:hover img { transform: scale(1.1); }
+
+@media screen and (min-width: 1024px) and (max-width: 1199px) {
+}
+@media screen and (max-width: 1023px) {
+  .lbox { width: 100% }
+  .rbox { display: none }
+}
+@media only screen and (max-width: 768px) {
+}
+@media only screen and (max-width: 480px) {
+  .lanmu h1 { font-size: 18px; }
+  .blogtitle { font-size: 16px }
+  .bloginfo { width: 100% }
+  .blogpic {
+    width: 100px; margin-right: 10px; height: 76px;
+    i { display: none }
+  }
+  a.viewmore { position: static; margin-top: 20px; text-align: center }
+  .blogtext { margin-top: -1px }
+  .imgscale img { height: 100%; max-width: 100%; }
+}
+
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-thumbsup:before {
+  content: "\e912";
+}
+.icon-user:before {
+  content: "\e901";
+}
+.icon-profile:before {
+  content: "\e901";
+}
+.icon-account:before {
+  content: "\e901";
+}
+.icon-avatar:before {
+  content: "\e901";
+}
+.icon-tag-stroke:before {
+  content: "\e902";
+}
+.icon-price:before {
+  content: "\e902";
+}
+.icon-thumbs-up:before {
+  content: "\e908";
+}
+.icon-home:before {
+  content: "\e90a";
+}
+.icon-home3:before {
+  content: "\e903";
+}
+.icon-quill:before {
+  content: "\e907";
+}
+.icon-image:before {
+  content: "\e90d";
+}
+.icon-images:before {
+  content: "\e90e";
+}
+.icon-bullhorn:before {
+  content: "\e91a";
+}
+.icon-file-text2:before {
+  content: "\e926";
+}
+.icon-folder:before {
+  content: "\e92f";
+}
+.icon-folder-open:before {
+  content: "\e930";
+}
+.icon-clock:before {
+  content: "\e94e";
+}
+.icon-bell:before {
+  content: "\e951";
+}
+.icon-search:before {
+  content: "\e986";
+}
+.icon-bin:before {
+  content: "\e9ac";
+}
+.icon-eye:before {
+  content: "\e9ce";
+}
+.icon-exit:before {
+  content: "\ea14";
+}
+.icon-crop:before {
+  content: "\ea57";
+}
+.icon-keyboard_arrow_right:before {
+  content: "\e910";
+}
+.icon-keyboard_arrow_down:before {
+  content: "\e911";
+}
+.icon-messages:before {
+  content: "\e900";
+}
+.icon-folder-outline:before {
+  content: "\e90c";
+}
+.icon-tag-stroke:before {
+  content: "\e902";
+}
+.icon-price:before {
+  content: "\e902";
+}
+.icon-home:before {
+  content: "\e90a";
+}
+.icon-folder-open-o:before {
+  content: "\e90f";
+}
+.icon-book:before {
+  content: "\e90b";
+}
+.icon-edit:before {
+  content: "\e904";
+}
+.icon-pencil-square-o:before {
+  content: "\e904";
+}
+.icon-commenting-o:before {
+  content: "\e905";
+}
+.icon-tags:before {
+  content: "\e906";
+}
+.icon-like:before {
+  content: "\e909";
+}
+.icon-thumbs-up2:before {
+  content: "\e909";
+}
+.icon-approve:before {
+  content: "\e909";
+}
+
