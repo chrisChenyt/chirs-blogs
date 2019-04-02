@@ -1,6 +1,6 @@
 # blogs-ssr
 
-> 博客前端项目--依赖Nuxt.js
+> 博客前端项目--依赖Nuxt.js，ssr服务端渲染
 
 ## Build Setup
 
