@@ -95,10 +95,7 @@
 				dialogErr: {show: false,info: ""},
 				replyInfo: {commentId: "",aite: ""},
 				pageSize: 8,
-				pageTotal: 0,
-
-				// userInfo: {name: "chirs",imgUrl: "/img/defaultUser.jpg"}
-				// userInfo: {name: "",imgUrl: ""}
+				pageTotal: 0
 			}
 		},
 		props: {
@@ -233,8 +230,7 @@
 		margin-left: 10px;
 	}
 	.comment{
-		/*background: #F7EDED;*/
-		background: #FAF7F7;
+		background: #fff;
 		margin-top: 10px;
 		padding: 20px 10px;
 		border-radius: 5px;

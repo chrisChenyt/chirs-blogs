@@ -3,7 +3,7 @@
 		<header id="header">
 			<div class="navbox">
 				<h2 id="mnavh" @click="navShow"><span class="navicon"></span></h2>
-				<div class="logo"><a href="javascript:void(0)">克里斯儿的blogs</a></div>
+				<div class="logo"><a href="javascript:void(0)">Chirs's blogs</a></div>
 				<nav>
 					<ul id="starlist">
 						<li v-for="item in tabs" @click="navHide">
@@ -18,8 +18,8 @@
 		</header>
 		<div class="searchbox">
 			<div class="search" v-show="showSearch">
-				<input id="keyboard" class="input_text" value="请输入关键字词" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字词'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字词'}" type="text">
-				<input class="input_submit" value="搜索" type="submit">
+				<input id="keyboard" v-model="ArticleTitle" class="input_text" value="请输入关键字词" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字词'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字词'}" type="text">
+				<input class="input_submit" @click="searchArticle" value="搜索" type="button">
 			</div>
 			<div class="searchclose" @click="showSearch=false"></div>
 		</div>
@@ -38,7 +38,7 @@
           <p><b>站点声明：</b></p>
           <p>1、本站部分资源来自互联网，我们转载的目的是用于学术交流与讨论，如果您认为我们的转载侵犯了您的权益，请与我们联系，我们将在3个工作日内删除相关内容。</p>
           <p>2、本网站所刊发、转载的文章，其版权均归原作者所有，如其他媒体、网站或个人从本网下载使用，请在转载有关文章时务必尊重该文章的著作权，保留本网注明的“稿件来源”，并自负版权等法律责任。</p>
-          <p>Copyright ©2018 - 2019 <a href="http://www.-----.com" target="_blank">cweb.fun</a> All Rights Reserved. 备案号：<a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备18050975号-1</a></p>
+          <p>Copyright ©2018 - 2019 <a href="http://blogs.cweb.fun" target="_blank">blogs.cweb.fun</a> All Rights Reserved. 备案号：<a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备18050975号-1</a></p>
         </div>
       </div>
     </footer>
@@ -51,12 +51,14 @@
 </template>
 <script>
   import { getScrollTop } from "@/utils/getScrollTop"
-  import { getElementTop } from "@/utils/getElementTop"
+	import { getElementTop } from "@/utils/getElementTop"
+	import webHttp from "../plugins/http.js"
   export default {
     data () {
       return {
         showBackTop: false,
 				showSearch: false,
+				ArticleTitle: '',
 				tabs: [
 					{name: "index",render: "首页"},
 					{name: "article",render: "技术分享"},
@@ -76,6 +78,9 @@
       this.getTop()
     },
     methods: {
+			searchArticle() {
+				this.$router.push({path: '/search',query: {title: this.ArticleTitle }})
+			},
 			navShow() {
         $("#starlist").toggle();
         $("#mnavh").toggleClass("open");
@@ -115,50 +120,10 @@
           func.apply(context,args)
         },delay)
       },
-      // backHome: function(){
-      //   this.location = []
-      //   this.$router.push({name: "index"})
-      // },
       backTop: function(){
         document.documentElement.scrollTop = 0
         document.body.scrollTop = 0
       },
-      // //当前位置的路由信息表
-      // currentLocation: function(to){
-      //   switch(to.name){
-      //     case "article" :
-      //     this.location = [{pathName: "article",showName: "技术文章"}]
-      //     break
-      //     case "articleShow" :
-      //     if(to.query.articleTag=='css'&& to.query.id==2){
-      //       this.articleTitle = '圣杯布局中对left盒子设置负内边距-100%的一点解释'
-      //     }
-      //     this.location = [
-      //       {pathName: "article",showName: "技术文章"},
-      //       {pathName: "techincal",showName: to.query.articleTag,params: {tag: to.query.articleTag}},
-      //       {pathName: "articleShow",showName: this.articleTitle,query: { tag: to.query.articleTag,id: to.query.id }}
-      //     ]
-      //     break
-      //     case "articleType" :
-      //     this.location = [
-      //       {pathName: "article",showName: "技术文章"},
-      //       {pathName: "articleType",showName: to.query.type,params: {type: to.query.type}},
-      //     ]
-      //     break
-      //     case "timeList" :
-      //     this.location = [{pathName: "timeList",showName: "时间轴"}]
-      //     break
-      //     case "msgboard" :
-      //     this.location = [{pathName: "msgboard",showName: "留言板"}]
-      //     break
-      //     case "resources" :
-      //     this.location = [{pathName: "resources",showName: "资源"}]
-      //     break
-      //     case "search" :
-      //     this.location = [{pathName: "search",showName: "搜索"}]
-      //     break
-      //   }
-      // }
     }
   }
 </script>
@@ -313,8 +278,9 @@
 				color: #fff;
 				outline: none;
 				position: absolute;
-				top: 10px;
-				right: 10%
+				right: 0;
+				height: 100%;
+				width: 25%;
 			}
 		}
 		.searchclose {
@@ -497,129 +463,11 @@
       }
     }
 	}
-//   *{
-//     margin: 0;
-//     padding: 0;
-//   }
-//   a{
-//     -webkit-tap-highlight-color: transparent
-//   }
-//   body{
-//     font: 400 16px/20px Arial,Helvetica,Tahoma,"华文细黑","Microsoft YaHei","微软雅黑",sans-serif;
-//     color: #000;
-//   }
-//   #app{
-//     margin: 50px 0 0 0;
-//   }
-//   .main{
-//     width: 100%;
-//     min-height: 1200px;
-//   }
-//   a{
-//     text-decoration: none
-//   }
-//   .body-content,.container{
-//     position: relative
-//   }
-//   .location{
-//     background: #FAF7F7;
-//     margin-top: 10px;
-//     padding: 10px;
-//     font-size: 14px;
-//     a{
-//       color: #16a085
-//     }
-//     div{
-//       display: inline;
-//     }
-//   }
-//   .section{
-//     display: flex;
-//     margin-left: auto;
-//     margin-right: auto;
-//   }
-//   .content{
-//     width: 68%;
-//   }
-//   .r-slide{
-//     width: 32%;
-//   }
   .fade-enter,.fade-leave-to{
     opacity: 0;
   }
   .fade-enter-active,.fade-leave-active{
     transition: all ease .5s;
   }
-//   .fix-bg{
-//     width: 100%;
-//     height: 100%;
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     z-index: -1;
-//   }
-// //手机端
-// @media screen and (max-width: 767px){
-//   .fix-bg{
-//     background: #f4f4f4
-//   }
-//   .section{
-//       flex-wrap: wrap;
-//         // padding: 10px 15px;
-//     }
-//     .section .content,.r-slide{
-//       width: 100%
-//     }
-//     .location{
-//       margin-top: 0;
-//     }
-// }
-// //平板
-// @media screen and (min-width: 768px){
-//   .fix-bg{
-//     background: url("/img/mainBg2.jpg") 0 0 no-repeat;
-//     background-size: 100% 100%;
-//   }
-//   .section{
-//     max-width: 760px;
-//     padding: 10px 30px;
-//   }
-//   .navbar{
-//     max-width: 820px
-//   }
-//   .search{
-//     padding: 0 30px
-//   }
-//   .nav-header{
-//     padding: 0 20px 0 35px
-//   }
-//   .r-slide{
-//     margin-left: 25px;
-//     margin-top: 10px;
-//   }
-// }
-// //小屏幕pc端
-//   @media screen and (min-width: 992px) {
-//     .section{
-//       max-width: 970px;
-//       padding: 10px 30px;
-//     }
-//     .navbar{
-//       max-width: 1030px;
-//     }
-//   }
-//   //大屏幕pc端
-//   @media screen and (min-width: 1200px){
-//     .section{
-//       max-width: 1140px;
-//       padding: 20px 30px;
-//     }
-//     .r-slide{
-//       margin-left: 30px;
-//     }
-//     .navbar{
-//       max-width: 1200px;
-//     }
-//   }
 </style>
 

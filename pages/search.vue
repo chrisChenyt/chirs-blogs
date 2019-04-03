@@ -1,57 +1,91 @@
 <template>
-	<div class = "search-abstract">
-		<div class = "search-tips">
-			<h3>{{ searchTips }}</h3>
+	<article>
+		<div class="lbox">
+			<!--bloglist begin-->
+			<article-list :articleList = "articles.search" :pageTotal='pageTotal' :pageSize='pageSize' @pageChange='pageChange'></article-list>
+      <!--bloglist end-->
 		</div>
-		<article-list :articleList = "articles.search" :pageArr="pageArr"></article-list>
-	</div>
+    <div class="rbox">
+      <!--sort begin-->
+			<sort :sortlist="sortlist"></sort>
+      <!--sort end-->
+      <!--recommend begin-->
+			<recommend :recommend="recommend"></recommend>
+      <!--recommend end-->
+		</div>
+	</article>
 </template>
 <script>
-	import articleList from "@/components/article/articleList"
+	import articleList from "../components/article/articleList"
+	import sort from "../components/base/sort.vue"
+	import recommend from "../components/base/recommend.vue"
+  import webHttp from '../plugins/http.js'
 	export default {
-		components: {
-			articleList
-		},
 		data(){
-			return{
-        searchTips: "",
-        articles: {
-          search: [
-            {
-              abstract: "前几天偶然看到有的同学对圣杯布局左侧定宽盒子设置负内边距-100%有疑惑，因此在这里写下自己的一点理解",
-              articleId: 2,
-              commentNum: 9,
-              date: "2018-04-10T14:44:59.427Z",
-              likeNum: 30,
-              original: true,
-              publish: true,
-              pv: 1538,
-              tag: ["css", "html"],
-              title: "圣杯布局中对left盒子设置负内边距-100%的一点解释",
-              __v: 0,
-              _id: "5acccc9e52602f14e4154a5e"
-            },
-          ]
-        },
-        pageArr: []
-			}
+			return {
+        articles:{ search:[]},
+        pageTotal: 0,
+        pageSize: 7,
+        sortlist: [],
+        recommend: [],
+      }
 		},
-		created(){
-			this.startSearch()
+		mounted(){
+      webHttp.request({
+        url: '/blog/searchArticle',
+        method: 'POST',
+        data: {
+          pageNum: 1,
+          pageSize: this.pageSize,
+					title: this.$route.query.title
+        },
+        callback: (res) => {
+          this.articles.search = res.list.data
+          this.pageTotal = res.list.totalCount
+          this.sortlist = res.sort
+          this.recommend = res.recommend
+        }
+      })
+		},
+		components: {
+			articleList, sort, recommend
+		},
+		watch: {
+			$route(){
+				webHttp.request({
+					url: '/blog/searchArticle',
+					method: 'POST',
+					data: {
+						pageNum: 1,
+						pageSize: this.pageSize,
+						title: this.$route.query.title
+					},
+					callback: (res) => {
+						this.articles.search = res.list.data
+					}
+				})
+			}
 		},
 		methods: {
-			startSearch: function(){
-        // this.searchTips = "杯具啊(┬┬﹏┬┬)啥也没找到···"
-        this.searchTips = "以下是为您搜索到的内容："
-			}
-		}
+      pageChange(currentPage) {
+        webHttp.request({
+          url: '/blog/searchArticle',
+          method: 'POST',
+          data: {
+            pageNum: currentPage,
+            pageSize: this.pageSize,
+						title: this.$route.query.title
+          },
+          callback: (res) => {
+            this.articles.search = res.list.data
+            this.pageTotal = res.list.totalCount
+            this.sortlist = res.sort
+            this.recommend = res.recommend
+          }
+        })
+      }
+    }
 	}
 </script>
-<style lang = "less" scoped>
-	.search-tips{
-		margin-top: 10px;
-		padding: 10px;
-		background: #FAF7F7;
-	}
+<style lang="less" scoped>
 </style>
-

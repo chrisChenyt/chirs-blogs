@@ -105,7 +105,7 @@
 				thinklike: [],
 				recommend: [],
 				comments: [],
-				userInfo: {name: "",imgUrl: ""}
+				userInfo: {name: "不知名网友",imgUrl: ""}
 			}
 		},
 		mounted(){
@@ -135,7 +135,6 @@
 					this.recommend = res.recommend
 					this.comments = res.comment.data
 					this.$refs.comment.pageTotal = res.comment.totalCount
-
 					let title = this.userInfo.name+'在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 浏览了你的文章 ---《'+this.articles.only.title+'》'
 					webHttp.request({
 						url: '/blog/createPv',
@@ -368,7 +367,7 @@
 </script> 
 <style lang = "less" scoped>
 	.article-show-content{
-		background: #FAF7F7;
+		background: #fff;
 		color: #404040;
 		font-size: 14px;
 		line-height: 1.8;

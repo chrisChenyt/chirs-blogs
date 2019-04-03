@@ -3,7 +3,7 @@ import qs from 'qs'
 
 axios.interceptors.request.use(config => {
   //显示loading
-  console.log('loading_start')
+  // console.log('loading_start')
   return config
 }, error => {
   return Promise.reject(error)

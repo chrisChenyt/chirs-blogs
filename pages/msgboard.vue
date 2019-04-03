@@ -330,7 +330,7 @@
 </script>
 <style lang = "less" scoped >
 	.msgboard{
-		background: #FAF7F7;
+		background: #fff;
 		margin-top: 10px;
 		padding: 20px 10px;
 		border-radius: 5px;

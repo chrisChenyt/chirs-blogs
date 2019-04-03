@@ -52,7 +52,7 @@
 <style lang="less" scoped>
   #resources_container{
     // width: 100%;
-    background: #FAF7F7;
+    background: #fff;
     margin-top: 10px;
     padding: 10px;
     border-radius: 5px;
