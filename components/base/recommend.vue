@@ -1,11 +1,11 @@
 <template>
   <div class="recommend whitebg">
     <h2 class="htitle">文章推荐</h2>
-    <section class="topnews imgscale"><a href="/"><img src="/img/h2.png"><span>6条网页设计配色原则,让你秒变配色高手</span></a></section>
+    <section class="topnews imgscale"><a href="/"><img v-lazy="h2png"><span>6条网页设计配色原则,让你秒变配色高手</span></a></section>
     <ul>
       <li v-for="(item,index) in recommend">
         <a href="javascript:void(0)" @click="jumpArticle(item)">
-          <i><img :src="'/img/text0'+index+'.png'"></i>
+          <i><img v-lazy="'/img/text0'+index+'.png'"></i>
           <p>{{ item.title }}</p>
         </a>
       </li>
@@ -16,6 +16,7 @@
 export default {
   data() {
     return{
+      h2png: '/img/h2.png'
     }
   },
   props: {

@@ -1,7 +1,7 @@
 <template>
   <div class="sort whitebg">
     <h2 class="htitle">点击排行</h2>
-    <section class="topnews imgscale"><a href="/"><img src="/img/h1.png"><span>6条网页设计配色原则,让你秒变配色高手</span></a></section>
+    <section class="topnews imgscale"><a href="/"><img v-lazy="h1png"><span>6条网页设计配色原则,让你秒变配色高手</span></a></section>
     <ul>
       <li v-for="item in sortlist"><i></i><a href="javascript:void(0)" @click="jumpArticle(item)">{{ item.title }}</a></li>
     </ul>
@@ -10,7 +10,9 @@
 <script>
   export default {
     data() {
-      return {}
+      return {
+        h1png: '/img/h1.png'
+      }
     },
     props: {
       sortlist: {

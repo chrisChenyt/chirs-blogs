@@ -14,6 +14,7 @@
 </template>
 <script>
     import data from '@/assets/js/emoji-data.js'
+    import '../../assets/css/emoji-sprite.css'
     export default {
         name: 'emoji',
         data(){

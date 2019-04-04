@@ -8,19 +8,19 @@
 					<span @click = "replyInfo.aite = ''" class = "exit-aite" :title = "'取消回复' + replyInfo.aite" >x</span>
 				</div>
 				<textarea  v-model="sayWords" @focus="showLogin" placeholder = "这小地盘儿交给你啦 *^_^*"></textarea>
-				<div class = "icon-submit-box">
+				<div class = "submit_box">
 					<div class = "icon-userInfo-box">
 						<div @click="emojiToggle" class = "emoji-icon">
-							<img src = "/img/emoji/grinning.png" height = "20px" width = "20px" alt = "" >
+							<img v-lazy="emojipng" height = "20px" width = "20px" alt = "" >
 						</div>
 						<span class = "fence"></span>
 						<div class = "reviewer-info" v-show="!!userInfo.name">
-							<img :src = userInfo.imgUrl alt = "" width = "20px" height = "20px">
+							<img v-lazy='userInfo.imgUrl' alt = "" width = "20px" height = "20px">
 							<span>{{ userInfo.name }}</span>
 							<a href = "javascript: void(0)" @click="loginOut" >退出</a>
 						</div>
 					</div>
-					<input ref = "pubButton" type = "button" value = "留言" @click="leaveMsg"/>
+					<span class="pubBtn" @click="leaveMsg">留言</span>
 				</div>
 			</div>
 			<div class = "emoji-box" v-show="emojiShow">
@@ -33,7 +33,7 @@
 					<li v-for="item in msgBoardArr" class = "board-item">
 						<div class = "msg-leaver">
 							<div class = "profile-pic">
-								<img :src='item.imgUrl' alt = "">
+								<img v-lazy='item.imgUrl' alt = "">
 							</div>
 							<div class = "triangle-line"></div>
 							<div class = "triangle-bg"></div>
@@ -50,7 +50,7 @@
 							<ul  v-if ="item.reply.length !== 0">
 								<li v-for ="rep in item.reply" class = "board-reply-item">
 									<div class = "profile-pic admin-pic">
-										<img :src='rep.imgUrl' alt="">
+										<img v-lazy='rep.imgUrl' alt="">
 									</div>
 									<div class = "triangle-line"></div>
 									<div class = "triangle-bg"></div>
@@ -103,6 +103,7 @@
 		},
 		data(){
 			return {
+				emojipng: '/img/emoji/grinning.png',
 				sayWords: "",
 				content: "",
 				emojiShow: false,
@@ -386,7 +387,7 @@
 		display: inline-block;
 		cursor: pointer;
 	}
-	.icon-submit-box{
+	.submit_box{
 		width: 100%;
 		margin-top: 8px;
 		display: flex;
@@ -560,7 +561,23 @@
 			margin-top: 45px;
 		}
 	}
-	.icon-submit-box input,.dialog button{
+	.submit_box .pubBtn{
+		display: inline-block;
+		text-align: center;
+		height: 28px;
+		line-height: 28px;
+		background: #5bc0de;
+		color: #fff;
+		padding: 0 8px;
+		border: 1px solid #46b8da;
+		border-radius: 4px;
+		cursor: pointer;
+    font-size: 12px;
+	}
+	.submit_box .pubBtn:hover{
+		background: #46AFCB;
+	}
+	.dialog button{
 		background: #5bc0de;
 		color: #fff;
 		padding: 6px 12px;
@@ -569,7 +586,7 @@
 		outline: none;
 		cursor: pointer;
 	}
-	.icon-submit-box input:hover,.dialog button:hover{
+	.dialog button:hover{
 		background: #46AFCB;
 	}
 	.icon-clock{
@@ -593,7 +610,7 @@
 		.say-box textarea{
 			width: 100%
 		}
-		.icon-submit-box{
+		.submit_box{
 			width: 100%
 		}
 		.emoji-box{

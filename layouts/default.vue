@@ -30,8 +30,8 @@
       <div class="box">
         <div class="wxbox">
           <ul>
-            <li><img src="../assets/img/wxgzh.jpg"><span>微信公众号</span></li>
-            <li><img src="../assets/img/wx.png"><span>我的微信</span></li>
+            <li><img v-lazy="lazywximg[0]"><span>微信公众号</span></li>
+            <li><img v-lazy="lazywximg[1]"><span>我的微信</span></li>
           </ul>
         </div>
         <div class="endnav">
@@ -56,6 +56,7 @@
   export default {
     data () {
       return {
+				lazywximg: ['/img/wxgzh.jpg','/img/wx.png'],
         showBackTop: false,
 				showSearch: false,
 				ArticleTitle: '',
@@ -70,8 +71,6 @@
       }
     },
     components: {
-    },
-    watch: {
     },
     mounted(){
       this.scrollCotainer()
@@ -129,8 +128,6 @@
 </script>
 
 <style lang="less">
-	@import "../assets/css/prism.css";
-	@import '../assets/css/emoji-sprite.css';
 	header {
 		width: 100%;
 		padding: 5px 0;

@@ -26,8 +26,7 @@ module.exports = {
     {
       src: 'assets/css/style.less',
       lang: 'less'
-    },
-    { src: "swiper/dist/css/swiper.css" }
+    }
   ],
   /*
   ** Customize the progress bar color
@@ -35,11 +34,11 @@ module.exports = {
   loading: { color: '#3B8070' },
 
   plugins: [
-    { src: '~assets/js/prism.js', ssr: false },
+    // { src: '~assets/js/prism.js', ssr: false },
     '~plugins/filters.js',
     '~plugins/route',
-    { src: '~plugins/element-ui', ssr: true },
-    { src: "~/plugins/vue-swiper.js", ssr: false },
+    '~plugins/lazyload',
+    { src: '~plugins/element-ui', ssr: true }
   ],
   loader:[
     {
@@ -65,12 +64,6 @@ module.exports = {
     '@nuxtjs/proxy'
   ],
   proxy: [
-    [
-      '/api',{
-        target: 'http://localhost:8888',
-        changeOrigin: true
-      }
-    ],
     [
       '/blog',{
         target: 'http://localhost:8888',

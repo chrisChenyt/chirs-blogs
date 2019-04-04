@@ -67,7 +67,7 @@
       <sort :sortlist="sortlist"></sort>
       <div class="ad whitebg imgscale">
         <ul>
-          <a href="javascript:void(0)"><img src="../assets/img/ad.png"></a>
+          <a href="javascript:void(0)"><img src="/img/ad.png"></a>
         </ul>
       </div>
 			<recommend :recommend="recommend"></recommend>
@@ -86,6 +86,8 @@
 	import webHttp from '../plugins/http.js'
 	import util from '../plugins/utils.js'
 	import login from '../components/login/userLogin.vue'
+	import '../assets/css/prism.css'
+  import "../assets/js/prism.js"
 	export default {
 		components: {
 			comment, sort, recommend, thinklike, introduce, login
@@ -105,7 +107,7 @@
 				thinklike: [],
 				recommend: [],
 				comments: [],
-				userInfo: {name: "不知名网友",imgUrl: ""}
+				userInfo: {name: "",imgUrl: ""}
 			}
 		},
 		mounted(){
@@ -135,17 +137,24 @@
 					this.recommend = res.recommend
 					this.comments = res.comment.data
 					this.$refs.comment.pageTotal = res.comment.totalCount
-					let title = this.userInfo.name+'在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 浏览了你的文章 ---《'+this.articles.only.title+'》'
-					webHttp.request({
-						url: '/blog/createPv',
-						method: 'POST',
-						data: {
-							name: this.userInfo.name,
-							title: title
-						},
-						callback: (res) => {
-						}
-					})
+					let title,userName
+					if(this.userInfo.name){
+						userName = this.userInfo.name
+						title = this.userInfo.name+'在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 浏览了你的文章 ---《'+this.articles.only.title+'》'
+					} else{
+						userName = '不知名网友'
+						title = '不知名网友在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 浏览了你的文章 ---《'+this.articles.only.title+'》'
+					}
+					// webHttp.request({
+					// 	url: '/blog/createPv',
+					// 	method: 'POST',
+					// 	data: {
+					// 		name: userName,
+					// 		title: title
+					// 	},
+					// 	callback: (res) => {
+					// 	}
+					// })
         }
       })
 		},
@@ -283,13 +292,20 @@
 				if(this.lovedArr.indexOf(article.articleId) !== -1){
 					this.$refs.comment.dialogErr = {show: true,info: "您已经赞过此篇文章"}
 				}else{
-					let title = this.userInfo.name+'在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 赞了你的文章 ---《'+article.title+'》'
+					let title,userName
+					if(this.userInfo.name){
+						userName = this.userInfo.name
+						title = this.userInfo.name+'在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 赞了你的文章 ---《'+article.title+'》'
+					}else{
+						userName = '不知名网友在'
+						title = '不知名网友在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 赞了你的文章 ---《'+article.title+'》'
+					}
 					webHttp.request({
 						url: '/blog/likeArticle',
 						method: 'POST',
 						data: {
 							title: title,
-							name: this.userInfo.name,
+							name: userName,
 							articleId: article.articleId
 						},
 						callback: (res) => {
@@ -390,6 +406,7 @@
 	.article-body li{
 		margin-left: 15px;
 	}
+
 	.article-details{
 		font-size: 12px;
 		line-height: 24px;
@@ -539,5 +556,10 @@
 			color: #16a085;
 			text-decoration: underline;
 		}
+	}
+</style>
+<style>
+	.article-body img{
+		max-width: 100%;
 	}
 </style>

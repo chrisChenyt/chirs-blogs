@@ -7,11 +7,11 @@
 					<a href = "javascript: void(0)" @click = "jump(item)">{{item.title}}</a>
 				</h2>
 				<div class = "article-review">
-					<img :src="'/img/article_'+item.tag[0]+'.png'" alt="">
-					<p class = "blogtext">{{ item.abstract }}</p>
+					<div><img v-lazy="'/img/article_'+item.tag[0]+'.png'" alt=""></div>
+					<div><p class = "blogtext">{{ item.abstract }}</p></div>
 				</div>
-				<p class="bloginfo"><i class="avatar"><img src="../../assets/img/avatar.jpg"></i><span>克里斯儿</span>
-					<span class = "article-msg-time">{{ item.date | reviseTime}}</span>
+				<p class="bloginfo"><i class="avatar"><img v-lazy="lazyimg[0]"></i><span>克里斯儿</span>
+					<span class = "article-msg-time">{{ item.date}}</span>
 					<span>【<a href="javascript:void(0)">原创</a>】</span>
 				</p>
 				<a href="javascript:void(0)" class="viewmore" @click = "jump(item)">阅读更多</a>
@@ -32,6 +32,11 @@
 </template>
 <script>
 	export default {
+		data() {
+			return{
+				lazyimg:['/img/avatar.jpg']
+			}
+		},
 		props: {
 			articleList: {
 				type: Array
@@ -40,7 +45,6 @@
 			pageSize: ''
 		},
 		mounted(){
-			Prism.highlightAll()
 		},
 		computed: {
 		},
@@ -79,8 +83,20 @@
 		color: #646464;
 		display: flex;
 		align-items: center;
+		justify-content: flex-start;
 		margin-top: 8px;
+		.blogtext { 
+			font-size: 14px;
+			color: #666;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			-webkit-box-orient: vertical;
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+			padding-left: 20px;
+		}
 		img{
+			display: block;
 			width: 100px;
 			height: 100px;
       transition: all ease .5s;

@@ -7,10 +7,19 @@
       <li><b>网站链接</b>：<a href="http://xxx" target="_blank">xxxxx</a></li>
       <li><b>文章统计</b>：299篇</li>
       <li><b>微信公众号</b>：扫描二维码，关注公众号</li>
-      <img src="../../assets/img/wxgzh.jpg" class="introduce_gzh">
+      <img v-lazy="gzhjpg" class="introduce_gzh">
     </ul>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return{
+      gzhjpg: '/img/wxgzh.jpg'
+    }
+  }
+}
+</script>
 <style lang="less">
   .introduce{
     li {

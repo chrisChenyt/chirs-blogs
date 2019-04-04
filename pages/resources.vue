@@ -3,7 +3,7 @@
     <div id="resources_container">
       <a class="resources_item" target="_blank" href="https://www.html.cn/jqapi-1.9/">
         <div>
-          <img src="/img/jquery.png">
+          <img v-lazy="lazyimg.jquery">
         </div>
         <div>
           <h3>jQuery API 中文文档</h3>
@@ -12,7 +12,7 @@
       </a>
       <a class="resources_item" target="_blank" href="https://www.html.cn/book/css/">
         <div>
-          <img src="/img/css3.png">
+          <img v-lazy="lazyimg.css3">
         </div>
         <div>
           <h3>CSS3参考手册</h3>
@@ -21,7 +21,7 @@
       </a>
       <a class="resources_item" target="_blank" href="https://www.html.cn/doc/sass/">
         <div>
-          <img src="/img/sass.png">
+          <img v-lazy="lazyimg.sass">
         </div>
         <div>
           <h3>Sass 中文文档</h3>
@@ -30,7 +30,7 @@
       </a>
       <a class="resources_item" target="_blank" href="https://www.html.cn/doc/less/">
         <div>
-          <img src="/img/less.png">
+          <img v-lazy="lazyimg.less">
         </div>
         <div>
           <h3>Less 中文文档</h3>
@@ -39,7 +39,7 @@
       </a>
       <a class="resources_item" target="_blank" href="http://bootstrap.html.cn/">
         <div>
-          <img src="/img/bootstrap.png">
+          <img v-lazy="lazyimg.bootstrap">
         </div>
         <div>
           <h3>Bootstrap 中文文档</h3>
@@ -49,6 +49,21 @@
     </div>
 	</article>
 </template>
+<script>
+export default {
+  data(){
+    return{
+      lazyimg:{
+        jquery: "/img/jquery.png",
+        css3: "/img/css3.png",
+        sass: "/img/sass.png",
+        less: "/img/less.png",
+        bootstrap: "/img/bootstrap.png"
+      }
+    }
+  }
+}
+</script>
 <style lang="less" scoped>
   #resources_container{
     // width: 100%;

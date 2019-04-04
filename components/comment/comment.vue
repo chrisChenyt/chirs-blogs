@@ -7,19 +7,19 @@
 				<span @click ="replyInfo.aite = ''" class = "exit-aite" :title = "'取消回复' + replyInfo.aite" >x</span>
 			</div>
 			<textarea  v-model="sayWords" @focus="showLogin" placeholder = "这小地盘儿交给你啦 *^_^*"></textarea>
-			<div class = "icon-submit-box">
+			<div class = "submit_box">
 				<div class = "icon-userInfo-box">
 					<div @click = "emojiToggle" class = "emoji-icon">
-						<img src = "/img/emoji/grinning.png" height = "20px" width = "20px" alt = "" >
+						<img v-lazy="emojipng" height = "20px" width = "20px" alt = "" >
 					</div>
 					<span class = "fence"></span>
 					<div class = "reviewer-info" v-show = "!!userInfo.name">
-						<img :src = userInfo.imgUrl alt = "" width = "20px" height = "20px">
+						<img v-lazy='userInfo.imgUrl' alt = "" width = "20px" height = "20px">
 						<span>{{ userInfo.name }}</span>
 						<a href = "javascript: void(0)" @click = "loginOut" >退出</a>
 					</div>
 				</div>
-				<input ref="pubButton" type ="button" value="发表评论" @click="publishComment"/>
+				<span class="pubBtn" @click="publishComment">发表评论</span>
 			</div>
 		</div>
 		<div class = "emoji-box" v-show = "emojiShow">
@@ -32,7 +32,7 @@
 				<li v-for="item in comments" class = "reviewer-item">
 					<div class = "reviewer">
 						<div class = "name-img-box">
-							<div><img :src='item.imgUrl' alt=""></div>
+							<div><img v-lazy='item.imgUrl' alt=""></div>
 							<h3>  {{ item.name }}</h3>
 						</div>
 						<pre><div class = "rev-c" v-html="item.content"></div></pre>
@@ -46,7 +46,7 @@
 						<ul>
 							<li v-for = "reply in item.reply">
 								<div class = "name-img-box">
-									<div><img :src = reply.imgUrl alt=""></div>
+									<div><img v-lazy='reply.imgUrl' alt=""></div>
 									<h3>  {{ reply.name }}: @{{ reply.aite }}</h3>
 								</div>
 								<pre><div class = "ans-c" v-html="reply.content"></div></pre>
@@ -88,6 +88,7 @@
 	export default {
 		data(){
 			return {
+				emojipng: '/img/emoji/grinning.png',
 				sayWords: "",
 				content: "",
 				emojiShow: false,
@@ -133,7 +134,6 @@
 					return
 				}
 				let content = this.productContent()
-				this.$refs.pubButton.value = "发表中..."
 				if(this.replyInfo.aite==''&&this.replyInfo.commentId==''){
 					let data = {
 						name: this.userInfo.name,
@@ -257,7 +257,23 @@
 			box-shadow: 0 0 10px rgba(0,0,0,.4);
 		}
 	}
-	.icon-submit-box input,.dialog button{
+	.submit_box .pubBtn{
+		display: inline-block;
+		text-align: center;
+		height: 28px;
+		line-height: 28px;
+		background: #5bc0de;
+		color: #fff;
+		padding: 0 8px;
+		border: 1px solid #46b8da;
+		border-radius: 4px;
+		cursor: pointer;
+    font-size: 12px;
+	}
+	.submit_box .pubBtn:hover{
+		background: #46AFCB;
+	}
+	.dialog button{
 		background: #5bc0de;
 		color: #fff;
 		padding: 6px 12px;
@@ -266,7 +282,7 @@
 		outline: none;
 		cursor: pointer;
 	}
-	.icon-submit-box input:hover,.dialog button:hover{
+	.dialog button:hover{
 		background: #46AFCB;
 	}
 	.exit-aite{
@@ -291,7 +307,7 @@
 		display: inline-block;
 		cursor: pointer;
 	}
-	.icon-submit-box{
+	.submit_box{
 		width: 100%;
 		margin-top: 8px;
 		display: flex;
@@ -449,7 +465,7 @@
 		.say-box textarea{
 			width: 100%;
 		}
-		.icon-submit-box{
+		.submit_box{
 			width: 100%;
 		}
 		.emoji-box{

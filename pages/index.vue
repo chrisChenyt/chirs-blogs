@@ -6,8 +6,8 @@
       <!--headline begin-->
       <div class="headline">
         <ul>
-          <li><a href="/" title="为什么说10月24日是程序员的节日？"><img src="/img/h1.png" alt="为什么说10月24日是程序员的节日？"><span>为什么说10月24日是程序员的节日？</span></a></li>
-          <li><a href="/" title="个人网站做好了，百度不收录怎么办？来，看看他们怎么做的"><img src="/img/h2.png" alt="个人网站做好了，百度不收录怎么办？来，看看他们怎么做的。"><span>个人网站做好了，百度不收录怎么办？来，看看他们怎么做的。</span></a></li>
+          <li><a href="/" title="为什么说10月24日是程序员的节日？"><img v-lazy="lazyimg[0]" alt="为什么说10月24日是程序员的节日？"><span>为什么说10月24日是程序员的节日？</span></a></li>
+          <li><a href="/" title="个人网站做好了，百度不收录怎么办？来，看看他们怎么做的"><img v-lazy="lazyimg[1]" alt="个人网站做好了，百度不收录怎么办？来，看看他们怎么做的。"><span>个人网站做好了，百度不收录怎么办？来，看看他们怎么做的。</span></a></li>
         </ul>
       </div>
       <!--headline end-->
@@ -42,7 +42,7 @@
         <h2 class="htitle"><span class="hnav"><a href="/">技术分享</a><a href="/">生活感悟</a></span>精彩专题</h2>
         <ul>
           <li v-for="(item,index) in special">
-            <i class="ztpic"><a href="/" target="_blank"><img :src="item.img"></a></i>
+            <i class="ztpic"><a href="/" target="_blank"><img v-lazy="item.img"></a></i>
             <b>{{ item.title }}</b>
             <span>{{ item.abstract }}</span>
             <a href="" target="_blank" class="readmore">文章阅读</a>
@@ -50,7 +50,7 @@
         </ul>
       </div>
       <!--special end-->
-      <div class="ad whitebg"> <img src="../assets/img/longad.png"> </div>
+      <div class="ad whitebg"> <img v-lazy="lazyimg[2]"> </div>
       <!--bloglist begin-->
       <article-list :articleList = "articles.all" :pageTotal='pageTotal' :pageSize='pageSize'></article-list>
     </div>
@@ -67,13 +67,13 @@
           <li><a href="/" target="_blank" class="iconfont icon-zhuye" title="网站地址"></a></li>
           <li><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=uNvQ0crL29Dd1sHM_MnJltvX1Q" target="_blank" class="iconfont icon-youxiang" title="我的邮箱"></a></li>
           <li><a href="http://wpa.qq.com/msgrd?v=3&uin=853784650&site=qq&menu=yes" target="_blank" class="iconfont icon---" title="QQ联系我"></a></li>
-          <li id="weixin"><a href="#" target="_blank" class="iconfont icon-weixin" title="关注我的微信"></a><i><img src="../assets/img/wx.png"></i></li>
+          <li id="weixin"><a href="#" target="_blank" class="iconfont icon-weixin" title="关注我的微信"></a><i><img src="/img/wx.png"></i></li>
         </ul>
       </div>
       <!--card end-->
       <!--notice begin-->
       <div class="notice whitebg">
-        <h2 class="htitle">网站公告</h2>
+        <h2 class="htitle">常见内容</h2>
         <ul>
           <li><a href="/">十条设计原则教你学会如何设计网页布局!</a></li>
           <li><a href="/">用js+css3来写一个手机栏目导航</a></li>
@@ -90,7 +90,7 @@
       <!--recommend end-->
       <div class="ad whitebg imgscale">
         <ul>
-          <a href="/"><img src="../assets/img/ad.png"></a>
+          <a href="/"><img v-lazy="lazyimg[3]"></a>
         </ul>
       </div>
       <!--thinklike begin-->
@@ -98,13 +98,12 @@
       <!--thinklike end-->
       <div class="ad whitebg imgscale">
         <ul>
-          <a href="/"><img src="../assets/img/ad02.png"></a>
+          <a href="/"><img v-lazy="lazyimg[4]"></a>
         </ul>
       </div>
       <!--introduce begin-->
       <introduce></introduce>
       <!--introduce end-->
-
     </div>
   </article>
 </template>
@@ -120,6 +119,7 @@
     layout: 'default',
     data(){ 
       return{
+        lazyimg: ['/img/h1.png','/img/h2.png','/img/longad.png','/img/ad.png','/img/ad02.png'],
         articles:{ all:[] },
         pageTotal: 0,
         pageSize: 7,
@@ -188,8 +188,8 @@
     },
     mounted() {
       $('.tab_buttons li').click(function() {
-          $(this).addClass('newscurrent').siblings().removeClass('newscurrent');
-          $('.newstab>div:eq(' + $(this).index() + ')').show().siblings().hide();
+        $(this).addClass('newscurrent').siblings().removeClass('newscurrent');
+        $('.newstab>div:eq(' + $(this).index() + ')').show().siblings().hide();
       });
       webHttp.request({
         url: '/blog/index',
@@ -338,7 +338,6 @@
   }
 
 	@media screen and (min-width: 1024px) and (max-width: 1199px) {
-    .fader .swiper-slide img { height: 320px }
     .special li { width: 27% }
 	}
 	@media screen and (max-width: 1023px) {
@@ -349,11 +348,6 @@
     .hnav a { font-size: 12px }
 	}
 	@media only screen and (max-width: 480px) {
-    .banbox { width: 100% }
-    .fader {
-      height: 200px;
-      .swiper-slide img { height: 200px; }
-    }
     
     .headline {
       width: 100%;
