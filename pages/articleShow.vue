@@ -346,7 +346,7 @@
 				event.preventDefault();
 				var _shareUrl = 'https://connect.qq.com/widget/shareqq/iframe_index.html?';
 						_shareUrl += 'url=' + encodeURIComponent(location.href);   //分享的链接
-						_shareUrl += '&title=' + encodeURIComponent(this.articles.only.title);     //分享的标题
+						_shareUrl += '&title=' + encodeURIComponent(this.articles.only.title)+'---'+document.title;     //分享的标题
 				window.open(_shareUrl,'_blank');
 			},
 			shareToQzone(event) {
@@ -354,9 +354,9 @@
 				var _shareUrl = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?';
 						_shareUrl += 'url=' + encodeURIComponent(document.location);   //参数url设置分享的内容链接|默认当前页location
 						_shareUrl += '&showcount=' + 0;      //参数showcount是否显示分享总数,显示：'1'，不显示：'0'，默认不显示
-						_shareUrl += '&desc=' + encodeURIComponent('我分享了一个博客，快来看看哦~');    //参数desc设置分享的描述，可选参数
+						_shareUrl += '&desc=' + encodeURIComponent('我分享了一篇博客，快来看看哦~');    //参数desc设置分享的描述，可选参数
 						_shareUrl += '&summary=' + encodeURIComponent('');    //参数summary设置分享摘要，可选参数
-						_shareUrl += '&title=' + encodeURIComponent(this.articles.only.title);    //参数title设置分享标题，可选参数
+						_shareUrl += '&title=' + encodeURIComponent(this.articles.only.title)+'---'+document.title;    //参数title设置分享标题，可选参数
 						_shareUrl += '&site=' + encodeURIComponent('克里斯儿的博客');   //参数site设置分享来源，可选参数
 				window.open(_shareUrl,'_blank');
 			},
@@ -364,14 +364,14 @@
 				event.preventDefault();
 				var _shareUrl = 'http://shuo.douban.com/!service/share?';
 						_shareUrl += 'href=' + encodeURIComponent(location.href);    //分享的链接
-						_shareUrl += '&name=' + encodeURIComponent(this.articles.only.title);    //分享的标题
+						_shareUrl += '&name=' + encodeURIComponent(this.articles.only.title)+'---'+document.title;    //分享的标题
 				window.open(_shareUrl,'_blank');
 			},
 			shareToSinaWB(event){
 				event.preventDefault();
 				var _shareUrl = 'http://v.t.sina.com.cn/share/share.php?';
 						_shareUrl += 'url='+ encodeURIComponent(document.location);     //参数url设置分享的内容链接|默认当前页location，可选参数
-						_shareUrl += '&title=' + encodeURIComponent(this.articles.only.title);    //参数title设置分享的标题|默认当前页标题，可选参数
+						_shareUrl += '&title=' + encodeURIComponent(this.articles.only.title)+'---'+document.title;    //参数title设置分享的标题|默认当前页标题，可选参数
 						window.open(_shareUrl,'_blank');
 			},
 			// share: function(type,url){
