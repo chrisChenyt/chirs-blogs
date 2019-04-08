@@ -7,7 +7,7 @@ module.exports = {
     title: "Chirs's blogs",
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' },
       { hid: 'description', name: 'description', content: '克里斯儿的个人博客网站，主要分享前端技术以及个人博客。提供免费的常用工具库及文档链接。' },
       { name: "keywords", content: "个人博客,技术分享,克里斯儿的博客,Vue,JavaScript,CSS,webpack" }
     ],

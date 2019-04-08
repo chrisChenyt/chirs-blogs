@@ -36,11 +36,6 @@
 						<div class="article-line"></div>
 						<h4>分享：</h4>
 						<div class="share">
-							<!-- <a href="javascript: void(0)" @click = "share('QQ','http://connect.qq.com/widget/shareqq/index.html')" class="design-bg-qq"></a>
-							<a href="javascript: void(0)" @click = "share('qzone','http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey')" class="design-bg-qzone"></a>
-							<a href="javascript: void(0)" @click = "share('sina','http://v.t.sina.com.cn/share/share.php')" class="design-bg-sina"></a>
-							<a href="javascript: void(0)" @click = "qrcode" class="design-bg-weixin"></a>
-							<a href="javascript: void(0)" @click = "share('douban','http://shuo.douban.com/!service/share')" class="design-bg-douban"></a> -->
 							<a href="javascript: void(0)" @click="shareToqq($event)" class="design-bg-qq"></a>
 							<a href="javascript: void(0)" @click="shareToQzone($event)" class="design-bg-qzone"></a>
 							<a href="javascript: void(0)" @click="shareToSinaWB($event)" class="design-bg-sina"></a>
@@ -112,16 +107,10 @@
 				thinklike: [],
 				recommend: [],
 				comments: [],
-				userInfo: {name: "",imgUrl: ""},
-				articleId: ''
+				userInfo: {name: "",imgUrl: ""}
 			}
 		},
 		mounted(){
-			if(this.$route.query.id){
-				this.articleId = this.$route.query.id
-			}else{
-				this.articleId = localStorage.getItem("articleId")
-			}
 			if(localStorage.getItem("articleLoved")){
 				this.lovedArr = JSON.parse(localStorage.getItem("articleLoved"))
 			}
@@ -138,7 +127,7 @@
         url: '/blog/articleShow',
         method: 'POST',
         data: {
-					articleId: this.articleId
+					articleId: this.$route.query.id
 				},
         callback: (res) => {
 					this.articles.only = res.list
@@ -200,7 +189,7 @@
           data: {
             pageNum: currentPage,
 						pageSize: 8,
-						articleId: this.articleId
+						articleId: this.$route.query.id
           },
           callback: (res) => {
 						this.comments = res.list.data
@@ -374,33 +363,6 @@
 						_shareUrl += '&title=' + encodeURIComponent(this.articles.only.title)+'---'+document.title;    //参数title设置分享的标题|默认当前页标题，可选参数
 						window.open(_shareUrl,'_blank');
 			},
-			// share: function(type,url){
-			// 	localStorage.setItem('articleId',this.$route.query.id)
-			// 	let	title = "这是一个积累web知识的个人博客",
-			// 		el = document.createElement("a"),
-			// 		_href,
-			// 		_url = window.location.href;
-				
-			// 	el.target = "_blank"
-			// 	switch (type){
-			// 		case "QQ" : 
-			// 		_href = url + "?title=" + title +"&url=" + _url + "&desc=我分享了一个博客，快来看看哦~" + "&site=克里斯儿的博客"
-			// 		break
-			// 		case "qzone" : 
-			// 		_href = url + "?title=" + title + "&desc=我分享了一个博客，快来看看哦~" + "&site=克里斯儿的博客" + "summary="
-			// 		break
-			// 		case "sina" : 
-			// 		_href = url + "?title=" + title + "&url=" + _url
-			// 		break
-			// 		case "weixin" : 
-			// 		_href = url + "&url=" + _url
-			// 		break
-			// 		case "douban" : 
-			// 		_href = url + "?name=" + title + "&href=" + _url
-			// 	}
-			// 	el.href = _href
-			// 	el.click()
-			// },
 			//微信二维码生成器
 			qrcode: function(){
 				if(this.qrShow === false){

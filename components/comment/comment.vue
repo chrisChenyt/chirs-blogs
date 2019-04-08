@@ -6,7 +6,7 @@
 				<strong>回复：@</strong><span>{{ replyInfo.aite }}</span>
 				<span @click ="replyInfo.aite = ''" class = "exit-aite" :title = "'取消回复' + replyInfo.aite" >x</span>
 			</div>
-			<textarea  v-model="sayWords" @focus="showLogin" placeholder = "这小地盘儿交给你啦 *^_^*"></textarea>
+			<textarea  v-model="sayWords" ref="textArea" @focus="showLogin" placeholder = "这小地盘儿交给你啦 *^_^*"></textarea>
 			<div class = "submit_box">
 				<div class = "icon-userInfo-box">
 					<div @click = "emojiToggle" class = "emoji-icon">
@@ -190,7 +190,12 @@
 				return finStr
 			},
 			emojiToggle: function(){// 表情按钮
-				this.emojiShow = !this.emojiShow
+				if(!this.userInfo.name&&!this.userInfo.imgUrl){
+					// 未登录
+					this.$emit('loginShow')
+				}else{
+					this.emojiShow = !this.emojiShow
+				}
 			},
 			exitEmoji: function(){
 				this.emojiShow = false
@@ -215,6 +220,7 @@
 			},
 			showLogin: function(){
 				if(!this.userInfo.name&&!this.userInfo.imgUrl){
+					this.$refs.textArea.blur()
 					// 未登录
 					this.$emit('loginShow')
 				}
