@@ -233,7 +233,7 @@
 			}
 		}
 	}
-	#starlist li a:hover, #starlist .nuxt-link-active, .selected > a, #starlist li:hover {
+	#starlist li a:hover, #starlist .nuxt-link-active, .selected > a {
 		color: #00c1de;
 	}
 	#starlist li:hover a {
@@ -267,7 +267,8 @@
 				height: 36px;
 				width: 72%;
 				padding-left: 10px;
-				outline: none
+				outline: none;
+				border-radius:0;
 			}
 			input.input_submit {
 				border: 0;
@@ -394,11 +395,12 @@
 		#starlist {
 			display: none;
 			width: 100%;
-			/* top: 30px;*/
+			background: #12b7de;
+			width: 55%;
+			padding-bottom: 100%;
 			li {
-				width: 55%;
+				width: 100%;
 				text-align: center;
-				background: #12b7de;
 				float: none;
 				display: block;
 				font-weight: bold;
@@ -412,9 +414,6 @@
 					background: #12b7de;
 					border-bottom: #49ccea 1px solid;
 				}
-			}
-			li:last-child {
-				padding-bottom: 100%
 			}
 		}
 		#starlist li a:hover, #starlist .nuxt-link-active, .selected > a, #starlist li:hover {
