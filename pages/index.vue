@@ -52,7 +52,7 @@
       <!--special end-->
       <div class="ad whitebg"> <img v-lazy="lazyimg[2]"> </div>
       <!--bloglist begin-->
-      <article-list :articleList = "articles.all" :pageTotal='pageTotal' :pageSize='pageSize'></article-list>
+      <article-list :articleList="articles.all" :pageTotal='pageTotal' :pageSize='pageSize'></article-list>
     </div>
     <!--bloglist end-->
     <div class="rbox">
@@ -60,7 +60,7 @@
       <div class="card">
         <h2>我的名片</h2>
         <p>网名：ChirsChen | 克里斯儿</p>
-        <p>职业：Web前端开发、H5前端开发</p>
+        <p>职业：前端开发工程师、前端架构师</p>
         <p>现居：北京市-朝阳区</p>
         <p>Email：chirschenyt@qq.com</p>
         <ul class="linkmore">
@@ -102,7 +102,7 @@
         </ul>
       </div>
       <!--introduce begin-->
-      <introduce></introduce>
+      <introduce :num='articleNum'></introduce>
       <!--introduce end-->
     </div>
   </article>
@@ -180,7 +180,8 @@
         ],
         sortlist: [],
         thinklike: [],
-        recommend: []
+        recommend: [],
+        articleNum:'' // 网站介绍文章总数
       }
     },
     components: {
@@ -206,6 +207,7 @@
           this.tabList[0].newslist = res.tabList.tech.data
           this.tabList[1].newslist = res.tabList.work.data
           this.tabList[2].newslist = res.tabList.life.data
+          this.articleNum = res.list.totalCount
         }
       })
     },

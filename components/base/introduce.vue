@@ -4,8 +4,8 @@
     <ul>
       <li><b>建站时间</b>：2018-10-10</li>
       <li><b>技术架构</b>：Vue.js+Node.js+MySQL</li>
-      <li><b>网站链接</b>：<a href="http://xxx" target="_blank">xxxxx</a></li>
-      <li><b>文章统计</b>：299篇</li>
+      <li><b>网站链接</b>：<a href="blogs.cweb.fun" target="_blank">https://blogs.cweb.fun</a></li>
+      <li><b>文章统计</b>：{{num}}篇</li>
       <li><b>微信公众号</b>：扫描二维码，关注公众号</li>
       <img v-lazy="gzhjpg" class="introduce_gzh">
     </ul>
@@ -17,6 +17,9 @@ export default {
     return{
       gzhjpg: '/img/wxgzh.jpg'
     }
+  },
+  props: {
+    num: ''
   }
 }
 </script>
