@@ -344,6 +344,7 @@
 		border-radius: 5px;
 		font-size: 14px;
 		color: #404040;
+    margin-bottom: 20px;
 		h2{
 			color: #462C2C; 
 		} 

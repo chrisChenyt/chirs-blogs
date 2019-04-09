@@ -66,11 +66,11 @@ export default {
 </script>
 <style lang="less" scoped>
   #resources_container{
-    // width: 100%;
     background: #fff;
     margin-top: 10px;
     padding: 10px;
     border-radius: 5px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
