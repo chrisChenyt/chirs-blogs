@@ -59,6 +59,7 @@
         } else if(this.imgCode == ''){
           this.userInfoErr.imgCode = '请填写验证码'
 				}else{
+					this.userInfoErr = {name: "",phone: "",imgCode: ""}
 					this.$emit('login')
 				}
       },
@@ -72,6 +73,7 @@
         }else if(this.imgCode == ''){
           this.userInfoErr.imgCode = '请填写验证码'
 				}else{
+					this.userInfoErr = {name: "",phone: "",imgCode: ""}
 					this.$emit('register')
 				}
       },
