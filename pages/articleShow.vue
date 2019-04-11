@@ -72,7 +72,7 @@
       </div>
 			<recommend :recommend="recommend"></recommend>
       <thinklike :thinklike="thinklike"></thinklike>
-      <introduce></introduce>
+      <introduce :num='articleNum'></introduce>
 		</div>
 		<login ref="login" @login="login" @register="register"></login>
 	</article>
@@ -107,7 +107,8 @@
 				thinklike: [],
 				recommend: [],
 				comments: [],
-				userInfo: {name: "",imgUrl: ""}
+				userInfo: {name: "",imgUrl: ""},
+        articleNum:'' // 网站介绍文章总数
 			}
 		},
 		mounted(){
@@ -137,6 +138,7 @@
 					this.recommend = res.recommend
 					this.comments = res.comment.data
 					this.$refs.comment.pageTotal = res.comment.totalCount
+					this.articleNum = res.num
 					let title,userName
 					if(this.userInfo.name){
 						userName = this.userInfo.name
@@ -179,6 +181,20 @@
 			},
 			$route(){
 				this.fullPath = window.location.href
+				console.log('1111111')
+				// 文章链接
+				this.fullPath = window.location.href
+				webHttp.request({
+					url: '/blog/articleShow',
+					method: 'POST',
+					data: {
+						articleId: this.$route.query.id
+					},
+					callback: (res) => {
+						this.articles.only = res.list
+						this.pre_next = res.pre_next
+					}
+				})
 			}
 		},
 		methods: {
@@ -319,17 +335,6 @@
 			},
 			jumpPn: function(item){
 				this.$router.push({query: {articleTag: item.tag[0],id: item.articleId }})
-				webHttp.request({
-					url: '/blog/articleShow',
-					method: 'POST',
-					data: {
-						articleId: item.articleId
-					},
-					callback: (res) => {
-						this.articles.only = res.list
-						this.pre_next = res.pre_next
-					}
-				})
 			},
 			shareToqq(event){
 				event.preventDefault();
