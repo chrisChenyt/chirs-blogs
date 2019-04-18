@@ -87,7 +87,8 @@
 	import util from '../plugins/utils.js'
 	import login from '../components/login/userLogin.vue'
 	import '../assets/css/prism.css'
-  import "../assets/js/prism.js"
+	import "../assets/js/prism.js"
+	import axios from 'axios'
 	export default {
 		components: {
 			comment, sort, recommend, thinklike, introduce, login
@@ -98,7 +99,8 @@
 				lovedArr: [],
 				fullPath: '',
         articles: { only: []
-        },
+				},
+				listccc: [],
 				pre_next: {
 					next: {},
 					pre: {}
@@ -108,10 +110,32 @@
 				recommend: [],
 				comments: [],
 				userInfo: {name: "",imgUrl: ""},
-        articleNum:'' // 网站介绍文章总数
+				articleNum:'' // 网站介绍文章总数
+				
+			}
+		},
+		asyncData (context,callback) {
+			webHttp.request({
+        url: context.$axios.defaults.baseURL+'blog/articleShow',
+        method: 'POST',
+        data: {
+					articleId: context.route.query.id
+				},
+        callback: (res) => {
+					callback(null,{ alist:res.list})
+        }
+			})
+		},
+		head () {
+			return {
+				title: this.alist.title+" - Chirs's blogs",
+				meta: [
+					{ hid: 'description', name: 'description', content: this.alist.abstract },
+				]
 			}
 		},
 		mounted(){
+			this.articles.only = this.alist
 			if(localStorage.getItem("articleLoved")){
 				this.lovedArr = JSON.parse(localStorage.getItem("articleLoved"))
 			}
@@ -131,7 +155,7 @@
 					articleId: this.$route.query.id
 				},
         callback: (res) => {
-					this.articles.only = res.list
+					// this.articles.only = res.list
 					this.pre_next = res.pre_next
           this.thinklike = res.thinklike
           this.sortlist = res.sort
