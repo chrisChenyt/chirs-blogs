@@ -75,6 +75,7 @@
       <introduce :num='articleNum'></introduce>
 		</div>
 		<login ref="login" @login="login" @register="register"></login>
+		<remote-js src="http://pv.sohu.com/cityjson?ie=utf-8"></remote-js>
 	</article>
 </template>
 <script>
@@ -90,7 +91,15 @@
 	import "../assets/js/prism.js"
 	export default {
 		components: {
-			comment, sort, recommend, thinklike, introduce, login
+			comment, sort, recommend, thinklike, introduce, login,
+			'remote-js': {
+				render(createElement) {
+					return createElement('script', { attrs: { type: 'text/javascript', src: this.src }});
+				},
+				props: {
+					src: { type: String, required: true },
+				}
+			}
 		},
 		data(){
 			return {
@@ -115,27 +124,26 @@
 		},
 		asyncData (context,callback) {
 			webHttp.request({
-        // url: context.$axios.defaults.baseURL+'blog/articleShow',
-        url: 'https://blogs.cweb.fun/blog/articleShow',
+        url: context.$axios.defaults.baseURL+'blog/articleShow',
+        // url: 'https://blogs.cweb.fun/blog/articleShow',
         method: 'POST',
         data: {
 					articleId: context.route.query.id
 				},
         callback: (res) => {
-					callback(null,{ alist:res.list})
+					callback(null,{ arricleRes:res})
         }
 			})
 		},
 		head () {
 			return {
-				title: this.alist.title+" - Chirs's blogs",
+				title: this.arricleRes.list.title+" - Chirs's blogs",
 				meta: [
-					{ hid: 'description', name: 'description', content: this.alist.abstract },
+					{ hid: 'description', name: 'description', content: this.arricleRes.list.abstract },
 				]
 			}
 		},
 		mounted(){
-			this.articles.only = this.alist
 			if(localStorage.getItem("articleLoved")){
 				this.lovedArr = JSON.parse(localStorage.getItem("articleLoved"))
 			}
@@ -148,41 +156,54 @@
 			})
 			// 文章链接
 			this.fullPath = window.location.href
-      webHttp.request({
-        url: '/blog/articleShow',
-        method: 'POST',
-        data: {
-					articleId: this.$route.query.id
-				},
-        callback: (res) => {
-					// this.articles.only = res.list
-					this.pre_next = res.pre_next
-          this.thinklike = res.thinklike
-          this.sortlist = res.sort
-					this.recommend = res.recommend
-					this.comments = res.comment.data
-					this.$refs.comment.pageTotal = res.comment.totalCount
-					this.articleNum = res.num
-					let title,userName
-					if(this.userInfo.name){
-						userName = this.userInfo.name
-						title = this.userInfo.name+'在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 浏览了你的文章 ---《'+this.articles.only.title+'》'
-					} else{
-						userName = '不知名网友'
-						title = '不知名网友在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 浏览了你的文章 ---《'+this.articles.only.title+'》'
+					
+			this.articles.only = this.arricleRes.list
+			this.pre_next = this.arricleRes.pre_next
+			this.thinklike = this.arricleRes.thinklike
+			this.sortlist = this.arricleRes.sort
+			this.recommend = this.arricleRes.recommend
+			this.comments = this.arricleRes.comment.data
+			this.$refs.comment.pageTotal = this.arricleRes.comment.totalCount
+			this.articleNum = this.arricleRes.num
+			let title,userName
+			if(this.userInfo.name){
+				userName = this.userInfo.name
+				title = this.userInfo.name+'在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 浏览了你的文章 ---《'+this.articles.only.title+'》'
+			} else{
+				if(returnCitySN["cname"]){
+					userName = returnCitySN["cname"]+'网友'
+				}else{
+					userName = '不知名网友'
+				}
+				title = userName+'在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 浏览了你的文章 ---《'+this.articles.only.title+'》'
+			}
+			
+			let Kname=''
+			if(returnCitySN["cip"]){
+				Kname = 'user_'+returnCitySN["cip"]
+			}else{
+				Kname = 'user_no'
+			}
+			let readArr=util.getCookie(Kname)?util.getCookie(Kname):[]
+			
+			if(readArr.indexOf(String(this.$route.query.id)) !== -1){
+				// console.log('该ip阅读过')
+			}else{
+				webHttp.request({
+					url: '/blog/addPv',
+					method: 'POST',
+					data: {
+						articleId: this.$route.query.id,
+						name: userName,
+						title: title
+					},
+					callback: (res) => {
+						readArr.push(String(this.$route.query.id))
+						util.setCookie(Kname,readArr,1)
+						this.articles.only.pv = res.pv
 					}
-					// webHttp.request({
-					// 	url: '/blog/createPv',
-					// 	method: 'POST',
-					// 	data: {
-					// 		name: userName,
-					// 		title: title
-					// 	},
-					// 	callback: (res) => {
-					// 	}
-					// })
-        }
-      })
+				})
+			}
 		},
 		computed: {
 			love_t: function(){
@@ -205,7 +226,6 @@
 			},
 			$route(){
 				this.fullPath = window.location.href
-				console.log('1111111')
 				// 文章链接
 				this.fullPath = window.location.href
 				webHttp.request({
@@ -337,8 +357,12 @@
 						userName = this.userInfo.name
 						title = this.userInfo.name+'在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 赞了你的文章 ---《'+article.title+'》'
 					}else{
-						userName = '不知名网友在'
-						title = '不知名网友在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 赞了你的文章 ---《'+article.title+'》'
+						if(returnCitySN["cname"]){
+							userName = returnCitySN["cname"]+'网友'
+						}else{
+							userName = '不知名网友'
+						}
+						title = userName+'在 '+util.getNowFormatDate('yyyy-MM-dd HH:mm')+' 赞了你的文章 ---《'+article.title+'》'
 					}
 					webHttp.request({
 						url: '/blog/likeArticle',
