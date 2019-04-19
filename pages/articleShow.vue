@@ -88,7 +88,6 @@
 	import login from '../components/login/userLogin.vue'
 	import '../assets/css/prism.css'
 	import "../assets/js/prism.js"
-	import axios from 'axios'
 	export default {
 		components: {
 			comment, sort, recommend, thinklike, introduce, login
@@ -116,7 +115,8 @@
 		},
 		asyncData (context,callback) {
 			webHttp.request({
-        url: context.$axios.defaults.baseURL+'blog/articleShow',
+        // url: context.$axios.defaults.baseURL+'blog/articleShow',
+        url: 'https://blogs.cweb.fun/blog/articleShow',
         method: 'POST',
         data: {
 					articleId: context.route.query.id
