@@ -124,8 +124,8 @@
 		},
 		asyncData (context,callback) {
 			webHttp.request({
-        url: context.$axios.defaults.baseURL+'blog/articleShow',
-        // url: 'https://blogs.cweb.fun/blog/articleShow',
+        // url: context.$axios.defaults.baseURL+'blog/articleShow',
+        url: 'https://blogs.cweb.fun/blog/articleShow',
         method: 'POST',
         data: {
 					articleId: context.route.query.id
