@@ -15,7 +15,9 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ],
     script: [
-      { src: '/js/qrcode.min.js' }
+      { src: '/js/qrcode.min.js' },
+      // { type: 'text/javascript',src: 'http://pv.sohu.com/cityjson?ie=utf-8' }
+      { type: 'text/javascript',src: 'https://pv.sohu.com/cityjson?ie=utf-8' }
     ]
   },
   /*

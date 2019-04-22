@@ -143,10 +143,6 @@
 				title: this.arricleRes.list.title+" - Chirs's blogs",
 				meta: [
 					{ hid: 'description', name: 'description', content: this.arricleRes.list.abstract },
-				],
-				script:[
-					// { type: 'text/javascript',src: 'http://pv.sohu.com/cityjson?ie=utf-8' }
-					{ type: 'text/javascript',src: 'https://pv.sohu.com/cityjson?ie=utf-8' }
 				]
 			}
 		},
