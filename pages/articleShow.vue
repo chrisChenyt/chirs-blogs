@@ -75,7 +75,7 @@
       <introduce :num='articleNum'></introduce>
 		</div>
 		<login ref="login" @login="login" @register="register"></login>
-		<remote-js src="https://pv.sohu.com/cityjson"></remote-js>
+		<remote-js src="https://pv.sohu.com/cityjson?ie=utf-8"></remote-js>
 	</article>
 </template>
 <script>
