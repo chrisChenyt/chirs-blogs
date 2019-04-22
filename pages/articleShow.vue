@@ -75,7 +75,7 @@
       <introduce :num='articleNum'></introduce>
 		</div>
 		<login ref="login" @login="login" @register="register"></login>
-		<remote-js src="https://pv.sohu.com/cityjson?ie=utf-8"></remote-js>
+		<remote-js src="https://pv.sohu.com/cityjson"></remote-js>
 	</article>
 </template>
 <script>
@@ -124,8 +124,8 @@
 		},
 		asyncData (context,callback) {
 			webHttp.request({
-        // url: context.$axios.defaults.baseURL+'blog/articleShow',
-        url: 'https://blogs.cweb.fun/blog/articleShow',
+        url: context.$axios.defaults.baseURL+'blog/articleShow',
+        // url: 'https://blogs.cweb.fun/blog/articleShow',
         method: 'POST',
         data: {
 					articleId: context.route.query.id
