@@ -75,7 +75,8 @@
       <introduce :num='articleNum'></introduce>
 		</div>
 		<login ref="login" @login="login" @register="register"></login>
-		<remote-js src="https://pv.sohu.com/cityjson?ie=utf-8"></remote-js>
+		<!-- <remote-js src="https://pv.sohu.com/cityjson?ie=utf-8"></remote-js> -->
+		<!-- <remote-js src="http://pv.sohu.com/cityjson?ie=utf-8"></remote-js> -->
 	</article>
 </template>
 <script>
@@ -89,17 +90,19 @@
 	import login from '../components/login/userLogin.vue'
 	import '../assets/css/prism.css'
 	import "../assets/js/prism.js"
+	import axios from 'axios'
+	import qs from 'qs'
 	export default {
 		components: {
 			comment, sort, recommend, thinklike, introduce, login,
-			'remote-js': {
-				render(createElement) {
-					return createElement('script', { attrs: { type: 'text/javascript', src: this.src }});
-				},
-				props: {
-					src: { type: String, required: true },
-				}
-			}
+			// 'remote-js': {
+			// 	render(createElement) {
+			// 		return createElement('script', { attrs: { type: 'text/javascript', src: this.src }});
+			// 	},
+			// 	props: {
+			// 		src: { type: String, required: true },
+			// 	}
+			// }
 		},
 		data(){
 			return {
@@ -140,6 +143,10 @@
 				title: this.arricleRes.list.title+" - Chirs's blogs",
 				meta: [
 					{ hid: 'description', name: 'description', content: this.arricleRes.list.abstract },
+				],
+				script:[
+					// { type: 'text/javascript',src: 'http://pv.sohu.com/cityjson?ie=utf-8' }
+					{ type: 'text/javascript',src: 'https://pv.sohu.com/cityjson?ie=utf-8' }
 				]
 			}
 		},
