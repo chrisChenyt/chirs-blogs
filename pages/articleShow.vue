@@ -29,7 +29,7 @@
 						<hr>
 						<div v-html="articles.only.content" class = "article-body">{{ articles.only.content }}</div>
 						<div class = "article-like" :class="{'article-like-after': lovedArr.indexOf(articles.only.articleId) !== -1}" @click="love(articles.only)"><span class = "love-text">{{ love_t }}</span></div>
-							<div class="article-warning" v-if="articles.only.original">
+							<div class="article-warning" v-if="articles.only.original=='true'">
 							<h6>本文为作者原创文章，转载请注明出处： </h6>
 							<i><a href="javascript: void(0)">{{ fullPath }}</a></i>
 						</div>

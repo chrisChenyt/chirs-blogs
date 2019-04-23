@@ -12,7 +12,8 @@
 				</div>
 				<p class="bloginfo"><i class="avatar"><img v-lazy="lazyimg[0]"></i><span>克里斯儿</span>
 					<span class = "article-msg-time">{{ item.date}}</span>
-					<span>【<a href="javascript:void(0)">原创</a>】</span>
+					<span v-if="item.original=='true'">【<a href="javascript:void(0)">原创</a>】</span>
+					<span v-if="item.original=='false'">【<a href="javascript:void(0)">转载</a>】</span>
 				</p>
 				<a href="javascript:void(0)" class="viewmore" @click = "jump(item)">阅读更多</a>
 			</li>
