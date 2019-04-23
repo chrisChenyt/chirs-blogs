@@ -41,7 +41,7 @@
         pageTotal: 0,
         pageSize: 7,
         tags: [
-          "CSS","html","JavaScript","nodejs","Vue","webpack","react","other"
+          "CSS","html","JS","nodejs","Vue","webpack","react","other"
 				],
 				color: ["#8A9B0F","#EB6841","#3FB8AF","#FE4365","#FC9D9A","#EDC951","#C8C8A9","#3299BB","#9BBFEA","#CCCC00"],
         sortlist: [],
