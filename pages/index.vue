@@ -6,8 +6,8 @@
       <!--headline begin-->
       <div class="headline">
         <ul>
-          <li><a href="/" title="为什么说10月24日是程序员的节日？"><img v-lazy="lazyimg[0]" alt="为什么说10月24日是程序员的节日？"><span>为什么说10月24日是程序员的节日？</span></a></li>
-          <li><a href="/" title="个人网站做好了，百度不收录怎么办？来，看看他们怎么做的"><img v-lazy="lazyimg[1]" alt="个人网站做好了，百度不收录怎么办？来，看看他们怎么做的。"><span>个人网站做好了，百度不收录怎么办？来，看看他们怎么做的。</span></a></li>
+          <li><a href="https://blogs.cweb.fun/articleShow?articleTag=CSS&id=14" title="css3动画transition和animation介绍"><img v-lazy="lazyimg[0]" alt="css3动画transition和animation介绍"><span>css3动画transition和animation介绍</span></a></li>
+          <li><a href="https://blogs.cweb.fun/articleShow?articleTag=react&id=15" title="如何开发一个适配Android和iOS双平台的React Native应用？"><img v-lazy="lazyimg[1]" alt="如何开发一个适配Android和iOS双平台的React Native应用？"><span>如何开发一个适配Android和iOS双平台的React Native应用？</span></a></li>
         </ul>
       </div>
       <!--headline end-->
@@ -24,7 +24,7 @@
           <div class="newsitem" v-for="(newsItem,index) in tabList">
             <div class="newspic">
               <ul>
-                <li v-for="item in newsItem.deslist"><a href="/"><img :src="item.imgName"><span>{{ item.describe }}</span></a></li>
+                <li v-for="item in newsItem.deslist"><a :href="item.link"><img :src="item.imgName"><span>{{ item.describe }}</span></a></li>
                </ul>
             </div>
             <ul class="newslist">
@@ -39,10 +39,10 @@
       <!--tab_box end-->
       <!--special begin-->
       <div class="special whitebg">
-        <h2 class="htitle"><span class="hnav"><a href="/">技术分享</a><a href="/">生活感悟</a></span>精彩专题</h2>
+        <h2 class="htitle"><span class="hnav"><a href="javascript:void(0)">技术分享</a><a href="javascript:void(0)">生活感悟</a></span>精彩专题</h2>
         <ul>
           <li v-for="(item,index) in special">
-            <i class="ztpic"><a href="/" target="_blank"><img v-lazy="item.img"></a></i>
+            <i class="ztpic"><a :href="item.link" target="_blank"><img v-lazy="item.img"></a></i>
             <b>{{ item.title }}</b>
             <span>{{ item.abstract }}</span>
             <a href="" target="_blank" class="readmore">文章阅读</a>
@@ -67,7 +67,7 @@
           <li><a href="/" target="_blank" class="iconfont icon-zhuye" title="网站地址"></a></li>
           <li><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=uNvQ0crL29Dd1sHM_MnJltvX1Q" target="_blank" class="iconfont icon-youxiang" title="我的邮箱"></a></li>
           <li><a href="http://wpa.qq.com/msgrd?v=3&uin=853784650&site=qq&menu=yes" target="_blank" class="iconfont icon---" title="QQ联系我"></a></li>
-          <li id="weixin"><a href="#" target="_blank" class="iconfont icon-weixin" title="关注我的微信"></a><i><img src="/img/wx.png"></i></li>
+          <li id="weixin"><a href="javascript:void(0)" target="_blank" class="iconfont icon-weixin" title="关注我的微信"></a><i><img src="/img/wx.png"></i></li>
         </ul>
       </div>
       <!--card end-->
@@ -75,10 +75,10 @@
       <div class="notice whitebg">
         <h2 class="htitle">常见内容</h2>
         <ul>
-          <li><a href="/">十条设计原则教你学会如何设计网页布局!</a></li>
-          <li><a href="/">用js+css3来写一个手机栏目导航</a></li>
-          <li><a href="/">6条网页设计配色原则,让你秒变配色高手</a></li>
-          <li><a href="/">三步实现滚动条触动css动画效果</a></li>
+          <li><a href="https://blogs.cweb.fun/articleShow?articleTag=JS&id=13">JS冒泡排序、选择排序、快速排序</a></li>
+          <li><a href="https://blogs.cweb.fun/articleShow?articleTag=JS&id=25">Object.defineProperty的介绍</a></li>
+          <li><a href="https://blogs.cweb.fun/articleShow?articleTag=Vue&id=11">在Vue项目中封装axios与异常处理</a></li>
+          <li><a href="https://blogs.cweb.fun/articleShow?articleTag=nodejs&id=10">koa2利用captchapng模块实现图片验证码</a></li>
         </ul>
       </div>
       <!--notice end-->
@@ -126,22 +126,22 @@
         tabList: [
           {
             deslist: [
-              { describe: '技术分享 describe111111', imgName: '/img/1.png' },
-              { describe: '技术分享 describe111111', imgName: '/img/3.png' }
+              { describe: 'http协议的状态码——400,401,403,404,500,502,503,301,302等常见网页错误代码',link: 'https://blogs.cweb.fun/articleShow?articleTag=html&id=21', imgName: '/img/1.png' },
+              { describe: 'Promise介绍——Promise是什么、Promise的三种状态、promise的优缺点、为什么用Promise、怎么用Promise',link: 'https://blogs.cweb.fun/articleShow?articleTag=JS&id=20', imgName: '/img/3.png' }
             ],
             newslist: []
           },
           {
             deslist: [
-              { describe: '工作日记 describe111111', imgName: '/img/2.png' },
-              { describe: '工作日记 describe111111', imgName: '/img/4.png' }
+              { describe: '', imgName: '/img/2.png' },
+              { describe: '', imgName: '/img/4.png' }
             ],
             newslist: []
           },
           {
             deslist: [
-              { describe: '生活感悟 describe111111', imgName: '/img/5.png' },
-              { describe: '生活感悟 describe111111', imgName: '/img/6.png' }
+              { describe: '', imgName: '/img/5.png' },
+              { describe: '', imgName: '/img/6.png' }
             ],
             newslist: []
           },
@@ -149,33 +149,39 @@
         special: [
           { 
             img: '/img/6.png',
-            title: '技术分享01标题技术分享01标题',
-            abstract: '技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要'
+            title: 'koa2使用koa-session中间件实现登录校验',
+            link: 'https://blogs.cweb.fun/articleShow?articleTag=nodejs&id=9',
+            abstract: '因为http协议本身是无状态的，什么意思呢？就是你请求一个网站的时候，服务器不知道你是谁。但是要实现登录功能，就是要让浏览器记住这个用户。这时候就需要一种服务来支持，我们可以使用session。'
           },
           { 
             img: '/img/5.png',
-            title: '技术分享02标题技术分享02标题',
-            abstract: '技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要'
+            title: 'koa2中使用redis',
+            link: 'https://blogs.cweb.fun/articleShow?articleTag=nodejs&id=7',
+            abstract: '博客中有一些公用的组件，其中一些数据变化不是很频繁，所以我使用redis将数据存储起来，避免重复操作mysql'
           },
           { 
             img: '/img/4.png',
-            title: '技术分享03标题技术分享03标题',
-            abstract: '技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要'
+            title: '深入理解闭包',
+            link: 'https://blogs.cweb.fun/articleShow?articleTag=JS&id=17',
+            abstract: '什么是闭包，如何使用它，为什么要使用它？'
           },
           { 
             img: '/img/3.png',
-            title: '技术分享04标题技术分享04标题',
-            abstract: '技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要'
+            title: '数组扁平化',
+            link: 'https://blogs.cweb.fun/articleShow?articleTag=JS&id=19',
+            abstract: '数组扁平化概念和实现方法'
           },
           { 
             img: '/img/2.png',
-            title: '技术分享05标题技术分享05标题',
-            abstract: '技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要'
+            title: 'nginx缓存静态资源',
+            link: 'https://blogs.cweb.fun/articleShow?articleTag=nginx&id=5',
+            abstract: '利用nginx缓存，可以将资源文件缓存到nginx指定的服务器目录中，再次访问就不需要请求服务器，直接从服务器缓存中读取资源，从而减小后端压力。'
           },
           { 
             img: '/img/1.png',
-            title: '技术分享06标题技术分享06标题',
-            abstract: '技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要技术分享01摘要'
+            title: 'CSS盒模型介绍以及应用',
+            link: 'https://blogs.cweb.fun/articleShow?articleTag=html&id=1',
+            abstract: 'CSS盒模型 又称框模型 (Box Model) ，包含了元素内容（content）、内边距（padding）、边框（border）、外边距（margin）几个要素。'
           },
         ],
         sortlist: [],

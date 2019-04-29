@@ -1,7 +1,7 @@
 <template>
   <div class="recommend whitebg">
     <h2 class="htitle">文章推荐</h2>
-    <section class="topnews imgscale"><a href="/"><img v-lazy="h2png"><span>6条网页设计配色原则,让你秒变配色高手</span></a></section>
+    <section class="topnews imgscale"><a href="https://blogs.cweb.fun/articleShow?articleTag=JS&id=26"><img v-lazy="h2png"><span>for...in、Object.keys 和 Object.getOwnPropertyNames 的异同点</span></a></section>
     <ul>
       <li v-for="(item,index) in recommend">
         <a href="javascript:void(0)" @click="jumpArticle(item)">
